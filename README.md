@@ -139,9 +139,9 @@ The application classes would look like so:
 
 See these test cases for more examples like the above:
 
- - [MetaAnnotatedClassTest](metatype-impl/src/test/java/org/metatype/MetaAnnotatedClassTest.java)
- - [MetaAnnotatedMethodTest](metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
- - [MetaAnnotatedFieldTest](metatype-impl/src/test/java/org/metatype/MetaAnnotatedFieldTest.java)
+ - [MetaAnnotatedClassTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedClassTest.java)
+ - [MetaAnnotatedMethodTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
+ - [MetaAnnotatedFieldTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedFieldTest.java)
 
 
 # Best Practices
@@ -280,8 +280,8 @@ Ideas on how this could be well designed are welcome.
 
 A view of how Meta-Annotations might be applied to a technology such as EJB is here:
 
- - [metatype-ejb/src/main/java/javax/ejb/meta/](metatype-ejb/src/main/java/javax/ejb/meta/)
+ - [metatype-ejb/src/main/java/javax/ejb/meta/](https://github.com/dblevins/metatypes/metatype-ejb/src/main/java/javax/ejb/meta/)
 
 # Presentations
 
-http://www.slideshare.net/dblevins1/2011-java-oneejbwithmetaannotations
+ - [2011 JavaOne EJB with Meta Annotations](http://www.slideshare.net/dblevins1/2011-java-oneejbwithmetaannotations)
