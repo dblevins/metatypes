@@ -30,7 +30,7 @@
   </properties>
 
   <modules>
-    <module>metatype</module>
+    <module>metatype-impl</module>
     <module>metatype-ejb</module>
   </modules>
 
