@@ -139,9 +139,9 @@ The application classes would look like so:
 
 See these test cases for more examples like the above:
 
- - [MetaAnnotatedClassTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedClassTest.java)
- - [MetaAnnotatedMethodTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
- - [MetaAnnotatedFieldTest](https://github.com/dblevins/metatypes/metatype-impl/src/test/java/org/metatype/MetaAnnotatedFieldTest.java)
+ - [MetaAnnotatedClassTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedClassTest.java)
+ - [MetaAnnotatedMethodTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
+ - [MetaAnnotatedFieldTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedFieldTest.java)
 
 
 # Best Practices
@@ -280,7 +280,7 @@ Ideas on how this could be well designed are welcome.
 
 A view of how Meta-Annotations might be applied to a technology such as EJB is here:
 
- - [metatype-ejb/src/main/java/javax/ejb/meta/](https://github.com/dblevins/metatypes/metatype-ejb/src/main/java/javax/ejb/meta/)
+ - [metatype-ejb/src/main/java/javax/ejb/meta/](https://github.com/dblevins/metatypes/tree/master/metatype-ejb/src/main/java/javax/ejb/meta/)
 
 # Presentations
 
