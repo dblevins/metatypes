@@ -31,7 +31,7 @@ import java.security.ProtectionDomain;
 public class MetaAnnotatedClass<T> extends MetaAnnotatedObject<Class<T>> {
 
     public MetaAnnotatedClass(Class<T> clazz) {
-        super(clazz, unroll(clazz, clazz));
+        super(clazz, unroll(clazz));
     }
 
     public Annotation[] getDeclaredAnnotations() {

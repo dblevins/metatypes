@@ -17,14 +17,21 @@ package org.metatype;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author David Blevins
  */
 public class MetaAnnotatedMethod extends MetaAnnotatedObject<Method> implements AnnotatedMethod<Method> {
 
+    private final Annotation[][] parameterAnnotations;
+
     public MetaAnnotatedMethod(Method method) {
-        super(method, unroll(method.getDeclaringClass(), method));
+        super(method, unroll(method));
+
+        this.parameterAnnotations = unrollParameters(method.getParameterAnnotations());
     }
 
     public Annotation[] getDeclaredAnnotations() {
@@ -32,7 +39,7 @@ public class MetaAnnotatedMethod extends MetaAnnotatedObject<Method> implements 
     }
 
     public Annotation[][] getParameterAnnotations() {
-        return target.getParameterAnnotations();
+        return parameterAnnotations;
     }
 
     public Class<?> getDeclaringClass() {

@@ -23,16 +23,14 @@ import java.util.List;
  * @author David Blevins
  */
 public class MetaAnnotation<T extends Annotation> {
-    private final Class<?> declaringClass;
     private final T annotation;
     private final int depth;
 
     private final List<MetaAnnotation<T>> conflicts = new ArrayList<MetaAnnotation<T>>();
 
-    MetaAnnotation(T annotation, int depth, Class<?> declaringClass) {
+    MetaAnnotation(T annotation, int depth) {
         this.annotation = annotation;
         this.depth = depth;
-        this.declaringClass = declaringClass;
     }
 
     public T get() {
@@ -41,10 +39,6 @@ public class MetaAnnotation<T extends Annotation> {
 
     public int getDepth() {
         return depth;
-    }
-
-    public Class<?> getDeclaringClass() {
-        return declaringClass;
     }
 
     public List<MetaAnnotation<T>> getConflicts() {
