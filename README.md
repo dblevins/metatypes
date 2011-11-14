@@ -140,8 +140,11 @@ The application classes would look like so:
 See these test cases for more examples like the above:
 
  - [MetaAnnotatedClassTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedClassTest.java)
- - [MetaAnnotatedMethodTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
  - [MetaAnnotatedFieldTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedFieldTest.java)
+ - [MetaAnnotatedMethodTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodTest.java)
+ - [MetaAnnotatedConstructorTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedConstructorTest.java)
+ - [MetaAnnotatedMethodParametersTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedMethodParametersTest.java)
+ - [MetaAnnotatedConstructorParametersTest](https://github.com/dblevins/metatypes/blob/master/metatype-impl/src/test/java/org/metatype/MetaAnnotatedConstructorParametersTest.java)
 
 
 # Best Practices
