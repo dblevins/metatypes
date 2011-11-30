@@ -35,7 +35,7 @@ public @interface Yearly {
     public static class $ {
 
         @Yearly
-        @Schedule(second = "0", minute = "0", hour = "0", month = "*", dayOfMonth = "1", year = "*")
+        @Schedule(second = "0", minute = "0", hour = "0", month = "*", year = "1")
         public void method() {
         }
     }
