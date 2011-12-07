@@ -218,7 +218,7 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
     }
 
     private static boolean isMetatypeAnnotation(Class<? extends Annotation> type) {
-        return type.getSimpleName().equals("Metatype") && type.isAnnotationPresent(type);
+        return type.getSimpleName().equals("Metatype") && type.isAnnotationPresent(type) || type.isAnnotationPresent(Metaroot.class);
     }
 
     protected static Map<Class<? extends Annotation>, MetaAnnotation<?>> unroll(AnnotatedElement element) {
