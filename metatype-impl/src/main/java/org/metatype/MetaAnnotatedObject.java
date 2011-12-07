@@ -17,6 +17,7 @@ package org.metatype;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import java.lang.reflect.AnnotatedElement;
@@ -218,7 +219,27 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
     }
 
     private static boolean isMetatypeAnnotation(Class<? extends Annotation> type) {
-        return type.getSimpleName().equals("Metatype") && type.isAnnotationPresent(type) || type.isAnnotationPresent(Metaroot.class);
+        if (isSelfAnnotated(type, "Metatype")) return true;
+
+        for (Annotation annotation : type.getAnnotations()) {
+            if (isSelfAnnotated(annotation.annotationType(), "Metaroot")) return true;
+        }
+
+        return false;
+    }
+
+    private static boolean isSelfAnnotated(Class<? extends Annotation> type, String name) {
+        return type.isAnnotationPresent(type) && type.getSimpleName().equals(name) && validTarget(type);
+    }
+
+    private static boolean validTarget(Class<? extends Annotation> type) {
+        final Target target = type.getAnnotation(Target.class);
+
+        if (target == null) return false;
+
+        final ElementType[] targets = target.value();
+
+        return targets.length == 1 && targets[0] == ElementType.ANNOTATION_TYPE;
     }
 
     protected static Map<Class<? extends Annotation>, MetaAnnotation<?>> unroll(AnnotatedElement element) {
