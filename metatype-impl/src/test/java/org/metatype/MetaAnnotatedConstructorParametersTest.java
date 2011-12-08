@@ -45,7 +45,7 @@ public class MetaAnnotatedConstructorParametersTest extends TestCase {
             final MetaAnnotatedClass<?> annotatedClass = new MetaAnnotatedClass(clazz);
 
             for (MetaAnnotatedConstructor method : annotatedClass.getConstructors()) {
-                map.put(method.getName(), method);
+                map.put(annotatedClass.getSimpleName().toLowerCase(), method);
             }
         }
 
