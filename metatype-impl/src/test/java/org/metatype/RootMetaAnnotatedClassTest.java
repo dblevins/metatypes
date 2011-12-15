@@ -15,16 +15,16 @@
  */
 package org.metatype;
 
-import junit.framework.TestCase;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import junit.framework.TestCase;
 
 /**
  * Basic assertions:
@@ -168,7 +168,7 @@ public class RootMetaAnnotatedClassTest extends TestCase {
 
 
 
-    @Metaroot
+    //@Metaroot
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ANNOTATION_TYPE)
     public @interface Metaroot {

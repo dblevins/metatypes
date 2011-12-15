@@ -15,6 +15,8 @@
  */
 package org.metatype;
 
+import static java.util.Arrays.asList;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -29,8 +31,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Arrays.asList;
 
 /**
  * @author David Blevins
@@ -184,10 +184,13 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
             }
         }
 
+        // TODO: why not? maybe ignore all annotations that are not applicable
         map.remove(Target.class);
         map.remove(Retention.class);
         map.remove(Documented.class);
-        map.remove(metatype);
+        // if the chicken is an egg, carry it forward
+        if (!isMetaAnnotation(metatype))
+            map.remove(metatype);
         map.remove(clazz);
 
         return map.values();
@@ -210,6 +213,10 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
         return null;
     }
 
+    private static boolean isA(Class<? extends Annotation> type, String name) {
+        return type.getSimpleName().equals(name) && validTarget(type);
+    }
+
     private static boolean isMetaAnnotation(Class<? extends Annotation> clazz) {
         for (Annotation annotation : clazz.getDeclaredAnnotations()) {
             if (isMetatypeAnnotation(annotation.annotationType())) return true;
@@ -219,17 +226,13 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
     }
 
     private static boolean isMetatypeAnnotation(Class<? extends Annotation> type) {
-        if (isSelfAnnotated(type, "Metatype")) return true;
+        if (isA(type, "Metatype")) return true;
 
         for (Annotation annotation : type.getAnnotations()) {
-            if (isSelfAnnotated(annotation.annotationType(), "Metaroot")) return true;
+            if (isA(annotation.annotationType(), "Metaroot")) return true;
         }
 
         return false;
-    }
-
-    private static boolean isSelfAnnotated(Class<? extends Annotation> type, String name) {
-        return type.isAnnotationPresent(type) && type.getSimpleName().equals(name) && validTarget(type);
     }
 
     private static boolean validTarget(Class<? extends Annotation> type) {
