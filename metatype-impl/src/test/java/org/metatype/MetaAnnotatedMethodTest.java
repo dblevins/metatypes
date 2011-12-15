@@ -15,7 +15,9 @@
  */
 package org.metatype;
 
-import junit.framework.TestCase;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
@@ -26,9 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import junit.framework.TestCase;
 
 /**
  * @author David Blevins
@@ -171,7 +171,7 @@ public class MetaAnnotatedMethodTest extends TestCase {
 
     // 100% your own annotations, even the @Metatype annotation
     // Any annotation called @Metatype and annotated with itself works
-    @Metatype
+    //@Metatype
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ANNOTATION_TYPE)
     public @interface Metatype {

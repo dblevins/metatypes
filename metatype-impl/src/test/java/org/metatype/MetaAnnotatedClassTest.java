@@ -15,16 +15,16 @@
  */
 package org.metatype;
 
-import junit.framework.TestCase;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import junit.framework.TestCase;
 
 /**
  * Basic assertions:
@@ -48,22 +48,6 @@ public class MetaAnnotatedClassTest extends TestCase {
             assertTrue(contains(Color.class, annotated.getDeclaredAnnotations()));
             assertTrue(contains(Color.class, annotated.getAnnotations()));
             assertEquals("white", annotated.getAnnotation(Color.class).value());
-        }
-
-        { // Square
-            final java.lang.reflect.AnnotatedElement annotated  = new MetaAnnotatedClass(Square.class);
-            assertNotNull(annotated);
-
-            assertTrue(annotated.isAnnotationPresent(Color.class));
-            assertTrue(annotated.getAnnotation(Color.class) != null);
-            assertTrue(!contains(Color.class, annotated.getDeclaredAnnotations()));
-            assertTrue(contains(Color.class, annotated.getAnnotations()));
-            assertEquals("red", annotated.getAnnotation(Color.class).value());
-
-            assertTrue(annotated.isAnnotationPresent(Red.class));
-            assertTrue(annotated.getAnnotation(Red.class) != null);
-            assertTrue(contains(Red.class, annotated.getDeclaredAnnotations()));
-            assertTrue(contains(Red.class, annotated.getAnnotations()));
         }
 
         { // Triangle
@@ -129,21 +113,6 @@ public class MetaAnnotatedClassTest extends TestCase {
             assertTrue(contains(Chicken.class, annotated.getAnnotations()));
         }
 
-        { // Fake - annotated, but not meta-annotated
-            final java.lang.reflect.AnnotatedElement annotated  = new MetaAnnotatedClass(Fake.class);
-            assertNotNull(annotated);
-
-            assertTrue(annotated.isAnnotationPresent(NotMeta.class));
-            assertTrue(annotated.getAnnotation(NotMeta.class) != null);
-            assertTrue(contains(NotMeta.class, annotated.getDeclaredAnnotations()));
-            assertTrue(contains(NotMeta.class, annotated.getAnnotations()));
-
-            assertFalse(annotated.isAnnotationPresent(Color.class));
-            assertTrue(annotated.getAnnotation(Color.class) == null);
-            assertFalse(contains(Color.class, annotated.getDeclaredAnnotations()));
-            assertFalse(contains(Color.class, annotated.getAnnotations()));
-        }
-
         { // None
             final java.lang.reflect.AnnotatedElement annotated  = new MetaAnnotatedClass(None.class);
             assertNotNull(annotated);
@@ -159,6 +128,41 @@ public class MetaAnnotatedClassTest extends TestCase {
 
     }
 
+    public void testFake() {
+        // Fake - annotated, but not meta-annotated
+        final java.lang.reflect.AnnotatedElement annotated  = new MetaAnnotatedClass(Fake.class);
+        assertNotNull(annotated);
+
+        assertTrue(annotated.isAnnotationPresent(NotMeta.class));
+        assertTrue(annotated.getAnnotation(NotMeta.class) != null);
+        assertTrue(contains(NotMeta.class, annotated.getDeclaredAnnotations()));
+        assertTrue(contains(NotMeta.class, annotated.getAnnotations()));
+
+        assertFalse(annotated.isAnnotationPresent(Color.class));
+        assertTrue(annotated.getAnnotation(Color.class) == null);
+        assertFalse(contains(Color.class, annotated.getDeclaredAnnotations()));
+        assertFalse(contains(Color.class, annotated.getAnnotations()));
+    }
+
+    public void testSquare() {
+        // Square
+        final java.lang.reflect.AnnotatedElement annotated  = new MetaAnnotatedClass(Square.class);
+        assertNotNull(annotated);
+
+        assertTrue(annotated.isAnnotationPresent(Color.class));
+        assertTrue(annotated.getAnnotation(Color.class) != null);
+        assertTrue(!contains(Color.class, annotated.getDeclaredAnnotations()));
+        assertTrue(contains(Color.class, annotated.getAnnotations()));
+        assertEquals("red", annotated.getAnnotation(Color.class).value());
+
+        assertTrue(annotated.isAnnotationPresent(Red.class));
+        assertTrue(annotated.getAnnotation(Red.class) != null);
+        assertTrue(contains(Red.class, annotated.getDeclaredAnnotations()));
+        assertTrue(contains(Red.class, annotated.getAnnotations()));
+
+        assertFalse(contains(Metatype.class, annotated.getAnnotations()));
+    }
+
     private boolean contains(Class<? extends Annotation> type, Annotation[] annotations) {
         for (Annotation annotation : annotations) {
             if (type.isAssignableFrom(annotation.annotationType())) return true;
@@ -169,7 +173,7 @@ public class MetaAnnotatedClassTest extends TestCase {
 
     // 100% your own annotations, even the @Metatype annotation
     // Any annotation called @Metatype and annotated with itself works
-    @Metatype
+    // @Metatype // we don't want to carry this one forward
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ANNOTATION_TYPE)
     public @interface Metatype {

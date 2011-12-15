@@ -1,8 +1,0 @@
-    <org.superbiz.corn.meta.api.PlantingTime>
-      <javax.ejb.Schedules>
-        <value>
-          <javax.ejb.Schedule month="5" dayOfMonth="15-Last" minute="30" hour="5"/>
-          <javax.ejb.Schedule month="6" dayOfMonth="1-15" minute="30" hour="5"/>
-        </value>
-      </javax.ejb.Schedules>
-    </org.superbiz.corn.meta.api.PlantingTime>
