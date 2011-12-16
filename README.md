@@ -6,33 +6,22 @@ A meta-annotation is any annotation class annotated with @Metatype.  The other a
 If any of those annotations happen to also be meta-annotations, they are unrolled as well and their annotations become part of the definition.
 
 
-## The root @Metatype
+## @Metatype
 
-The recursion that is the meta-annotation concept only happens when an annotation is marked as a `@Metatype`.  While at some point in the future
-there may be a standard `@Metatype` annotation you can import and use, currently this is designed to be something you supply for yourself.
+The recursion that is the meta-annotation concept only happens when an annotation is marked as a `@javax.annotation.Metatype`.
 
-To create your `@Metatype`, simply:
+When `@Metatype` is seen the basic contract is "carry the surrounding annotations forward".  When a class, method or other
+target uses an annotation annotated with `@Metatype` the annotations on that annotation are "unrolled" or carried forward and
+ effectively placed on that class, method or other target as if they were explicitly declared.
 
-  - Define an annotation called `Metatype` in any package
-  - Annotated that `@Metatype` annotation with itself
-  - Mark `@Target(ElementType.ANNOTATION_TYPE)` and `@Retention(RetentionPolicy.RUNTIME)`
-  - Apply no other annotations
+If any of the annotations that are carried forward also are annotated with `@Metatype` the recursion continues.  The result is
+a simple algorithm or design pattern that provides inheritance or reuse in a way that is not specific to any domain, API, or specification.
 
-In short, a valid `@Metatype` root is any annotation named `@Metatype` which is annotated with itself and no other annotations of significance.
+APIs and specifications can choose to formally adopt annotation reuse in this fashion, but the core concept and implementations of `@Metatype`
+do not need to be expanded to support these APIs or specifications.
 
-    package org.superbiz.accesstimeout.api;
-
-    import java.lang.annotation.ElementType;
-    import java.lang.annotation.Retention;
-    import java.lang.annotation.RetentionPolicy;
-    import java.lang.annotation.Target;
-
-    @Metatype
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ElementType.ANNOTATION_TYPE)
-    public @interface Metatype {
-    }
-
+The simple elegance of this not being domain specific is that it could be used to combine several annotations from different specifications
+into one reusable annotation.  Say JAX-RS `@PathParam("id")` with Bean Validation `@NotNull` to create a new annotation called `@ValidId`.
 
 ## Creating Meta-Annotations
 
