@@ -15,6 +15,9 @@
  */
 package org.metatype;
 
+import javax.annotation.Metaroot;
+import javax.annotation.Metatype;
+
 import static java.util.Arrays.asList;
 
 import java.lang.annotation.Annotation;
@@ -213,10 +216,6 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
         return null;
     }
 
-    private static boolean isA(Class<? extends Annotation> type, String name) {
-        return type.getSimpleName().equals(name) && validTarget(type);
-    }
-
     private static boolean isMetaAnnotation(Class<? extends Annotation> clazz) {
         for (Annotation annotation : clazz.getDeclaredAnnotations()) {
             if (isMetatypeAnnotation(annotation.annotationType())) return true;
@@ -226,10 +225,10 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
     }
 
     private static boolean isMetatypeAnnotation(Class<? extends Annotation> type) {
-        if (isA(type, "Metatype")) return true;
+        if (Metatype.class.equals(type)) return true;
 
         for (Annotation annotation : type.getAnnotations()) {
-            if (isA(annotation.annotationType(), "Metaroot")) return true;
+            if (Metaroot.class.equals(annotation.annotationType())) return true;
         }
 
         return false;

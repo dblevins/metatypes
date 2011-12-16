@@ -26,6 +26,8 @@ import java.lang.annotation.Target;
 
 import junit.framework.TestCase;
 
+import javax.annotation.Metatype;
+
 /**
  * Basic assertions:
  * <p/>
@@ -170,14 +172,6 @@ public class MetaAnnotatedClassTest extends TestCase {
         return false;
     }
 
-
-    // 100% your own annotations, even the @Metatype annotation
-    // Any annotation called @Metatype and annotated with itself works
-    // @Metatype // we don't want to carry this one forward
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ANNOTATION_TYPE)
-    public @interface Metatype {
-    }
 
     @Target(value = {TYPE})
     @Retention(value = RUNTIME)

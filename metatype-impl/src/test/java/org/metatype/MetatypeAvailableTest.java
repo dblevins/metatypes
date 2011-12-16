@@ -24,6 +24,8 @@ import java.lang.annotation.Target;
 
 import junit.framework.TestCase;
 
+import javax.annotation.Metaroot;
+
 /**
  * @author <a href="mailto:cdewolf@redhat.com">Carlo de Wolf</a>
  */
@@ -55,6 +57,7 @@ public class MetatypeAvailableTest extends TestCase {
     }
 
     @Metatype // we want to carry this one forward
+    @Metaroot
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ANNOTATION_TYPE)
     public @interface Metatype {

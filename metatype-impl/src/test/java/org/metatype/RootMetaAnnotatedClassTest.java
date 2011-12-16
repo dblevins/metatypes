@@ -26,6 +26,8 @@ import java.lang.annotation.Target;
 
 import junit.framework.TestCase;
 
+import javax.annotation.Metaroot;
+
 /**
  * Basic assertions:
  * <p/>
@@ -164,14 +166,6 @@ public class RootMetaAnnotatedClassTest extends TestCase {
             if (type.isAssignableFrom(annotation.annotationType())) return true;
         }
         return false;
-    }
-
-
-
-    //@Metaroot
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ANNOTATION_TYPE)
-    public @interface Metaroot {
     }
 
     @Metaroot

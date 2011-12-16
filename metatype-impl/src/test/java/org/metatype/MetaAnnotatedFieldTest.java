@@ -29,6 +29,8 @@ import java.util.Map;
 
 import junit.framework.TestCase;
 
+import javax.annotation.Metatype;
+
 /**
  * @author David Blevins
  */
@@ -166,14 +168,6 @@ public class MetaAnnotatedFieldTest extends TestCase {
             if (type.isAssignableFrom(annotation.annotationType())) return true;
         }
         return false;
-    }
-
-    // 100% your own annotations, even the @Metatype annotation
-    // Any annotation called @Metatype and annotated with itself works
-    //@Metatype
-    @Retention(RetentionPolicy.RUNTIME)
-    @Target(ANNOTATION_TYPE)
-    public @interface Metatype {
     }
 
     @Target({FIELD})
