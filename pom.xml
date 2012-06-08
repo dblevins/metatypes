@@ -35,6 +35,21 @@
     <module>metatype-ejb</module>
   </modules>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.metatype</groupId>
+        <artifactId>metatype-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.metatype</groupId>
+        <artifactId>metatype-impl</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <build>
     <defaultGoal>install</defaultGoal>
     <plugins>
