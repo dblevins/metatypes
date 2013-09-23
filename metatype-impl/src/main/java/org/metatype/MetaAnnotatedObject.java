@@ -231,8 +231,23 @@ public abstract class MetaAnnotatedObject<T> implements MetaAnnotated<T> {
             if (Metaroot.class.equals(annotation.annotationType())) return true;
         }
 
-        return false;
+        return _isMetatypeAnnotation(type);
     }
+
+    private static boolean _isMetatypeAnnotation(Class<? extends Annotation> type) {
+         if (isSelfAnnotated(type, "Metatype")) return true;
+
+         for (Annotation annotation : type.getAnnotations()) {
+             if (isSelfAnnotated(annotation.annotationType(), "Metaroot")) return true;
+         }
+
+         return false;
+     }
+
+     private static boolean isSelfAnnotated(Class<? extends Annotation> type, String name) {
+         return type.isAnnotationPresent(type) && type.getSimpleName().equals(name) && validTarget(type);
+     }
+
 
     private static boolean validTarget(Class<? extends Annotation> type) {
         final Target target = type.getAnnotation(Target.class);
